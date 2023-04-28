@@ -1,0 +1,20 @@
+# This contains params to be used by the stages to train or predict
+IMAGE_SIZE : [224, 224, 3] # Image size used in VGG16
+CLASSES : 4
+FREEZE_ALL : True
+FREEZE_TILL: -5
+DATA_AUGMENTATION : True
+VALIDATION_SPLIT_SIZE: 0.20
+LOSS_FUNCTION : categorical_crossentropy
+METRICS : accuracy
+BATCH_SIZE : 16 # Default batch size is 32 
+EPOCHS: 2
+LEARNING_RATE : 0.001
+EARLY_STOPPING_PATIENCE : 10
+LEARNING_RATE_PATIENCE : 3
+TRAIN_FORM_CHECKPOINT : False
+
+BLESSING_THRESHOLD_COMPARISION : False
+MODEL_BLESSING_THRESHOLD : 0.001
+
+

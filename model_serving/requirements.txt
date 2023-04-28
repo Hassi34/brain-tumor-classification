@@ -1,0 +1,7 @@
+fastapi==0.95.0
+uvicorn 
+aipilot
+opencv-python-headless==4.7.0.72
+imutils
+PyYAML
+-e .

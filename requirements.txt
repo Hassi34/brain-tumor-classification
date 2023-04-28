@@ -1,0 +1,9 @@
+aipilot
+tqdm>=4.64.1
+dvc>=2.50.0
+dvc-gs
+python-dotenv
+google-cloud-storage
+cryptography>=39.0.1
+mlflow>=2.2.2
+-e .
