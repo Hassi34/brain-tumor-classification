@@ -69,7 +69,7 @@ MLOps, also known as DevOps for machine learning, is an iterative and collaborat
 The ultimate goal of our vision AI project is to develop a robust and scalable brain tumor detection system that can be easily deployed in production environments. By leveraging the level 2 MLOps architecture. It will help to minimize the healthcare operational cost and increase the effectiveness of the services by assisting the healthcare provider in accurate decision-making.
 
 ## Class Activation Map
-![image](./assets/activationMap.png)
+![image](./assets/ActivationMap.png)
 ## System Design
 ![image](./assets/SystemDesign.png)
 
