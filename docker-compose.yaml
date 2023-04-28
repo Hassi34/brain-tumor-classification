@@ -1,9 +1,0 @@
-services:
-  app:
-    build: .
-    container_name: brain-tumor-container
-    command: python src/main.py
-    ports:
-      - 8080:8080
-    volumes:
-      - .:/brain_tumor_model_serving
