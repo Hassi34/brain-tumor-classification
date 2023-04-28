@@ -1,0 +1,147 @@
+schema: '2.0'
+stages:
+  LoadData:
+    cmd: python src/stage_01_get_data.py --config=configs/config.yaml
+    deps:
+    - path: configs/config.yaml
+      md5: 854bc50c2afc78589b13eb6ea8d24af2
+      size: 2332
+    - path: src/cloud_sync/object_storage.py
+      md5: 276090407df5f37f317c71e090c1c68f
+      size: 3452
+    - path: src/stage_01_get_data.py
+      md5: 2f1f7e9661117522fda13ab2d4706808
+      size: 1054
+    - path: src/utils/common.py
+      md5: 30afeb62522e666fc501d207dc0996e2
+      size: 503
+    outs:
+    - path: dataset/
+      md5: ee3ea11752cd6317fafe75dcb908bae3.dir
+      size: 98844072
+      nfiles: 1824
+  PrepareModel:
+    cmd: python src/stage_02_prepare_model.py --config=configs/config.yaml --params=params.yaml
+    deps:
+    - path: configs/config.yaml
+      md5: 854bc50c2afc78589b13eb6ea8d24af2
+      size: 2332
+    - path: params.yaml
+      md5: 732567af23dd45e1e4face8baf307cc6
+      size: 535
+    - path: src/cloud_sync/object_storage.py
+      md5: 276090407df5f37f317c71e090c1c68f
+      size: 3452
+    - path: src/ml/model.py
+      md5: e15c9a9261902ca431e3433e19e36f53
+      size: 5034
+    - path: src/stage_02_prepare_model.py
+      md5: 0d0898a1227b7852eea78c539c52e69e
+      size: 2322
+    - path: src/utils/common.py
+      md5: 30afeb62522e666fc501d207dc0996e2
+      size: 503
+    params:
+      params.yaml:
+        CLASSES: 3
+        FREEZE_ALL: true
+        FREEZE_TILL: -5
+        IMAGE_SIZE:
+        - 224
+        - 224
+        - 3
+        LEARNING_RATE: 0.001
+        LOSS_FUNCTION: categorical_crossentropy
+        METRICS: accuracy
+    outs:
+    - path: artifacts/models/base_model.h5
+      md5: aae3f4c5cd8a557e8d2d5a98ee37322e
+      size: 75214488
+    - path: artifacts/models/untrained_full_model.h5
+      md5: bf9239511ef077b8bb12b0995f4a41b1
+      size: 79505320
+  TraningAndEvaluation:
+    cmd: python src/stage_03_train_evaluate.py --config=configs/config.yaml --params=params.yaml
+    deps:
+    - path: artifacts/models/untrained_full_model.h5
+      md5: 8ec4833fdfc1da2d81109992e1246605
+      size: 79505320
+    - path: configs/config.yaml
+      md5: 854bc50c2afc78589b13eb6ea8d24af2
+      size: 2332
+    - path: dataset/
+      md5: ee3ea11752cd6317fafe75dcb908bae3.dir
+      size: 98844072
+      nfiles: 1824
+    - path: params.yaml
+      md5: 732567af23dd45e1e4face8baf307cc6
+      size: 535
+    - path: src/cloud_sync/object_storage.py
+      md5: 276090407df5f37f317c71e090c1c68f
+      size: 3452
+    - path: src/ml/model.py
+      md5: e15c9a9261902ca431e3433e19e36f53
+      size: 5034
+    - path: src/stage_03_train_evaluate.py
+      md5: 07d0fb7d9e8fa08efc0299f1941c70e9
+      size: 6911
+    - path: src/utils/common.py
+      md5: 30afeb62522e666fc501d207dc0996e2
+      size: 503
+    params:
+      params.yaml:
+        BATCH_SIZE: 16
+        DATA_AUGMENTATION: true
+        EARLY_STOPPING_PATIENCE: 10
+        EPOCHS: 2
+        LEARNING_RATE_PATIENCE: 4
+        TRAIN_FORM_CHECKPOINT: false
+        VALIDATION_SPLIT_SIZE: 0.2
+    outs:
+    - path: artifacts/checkpoints/
+      md5: 140c203bf6825cbb5e772f49c4e045fa.dir
+      size: 88027400
+      nfiles: 1
+    - path: artifacts/model_evaluation/
+      md5: 29e825cc649f6928c176bbe196f88003.dir
+      size: 47557
+      nfiles: 2
+    - path: artifacts/models/trained_model.h5
+      md5: fdc1bdc523206a61397dd987e55be007
+      size: 88027400
+    - path: logs/tensorboard_logs_dir/
+      md5: 7aae23d26a6d177fea25efe78ae70b63.dir
+      size: 1736379
+      nfiles: 2
+  ModelBlessing:
+    cmd: python src/stage_04_model_blessing.py --config=configs/config.yaml --params=params.yaml
+    deps:
+    - path: artifacts/models/trained_model.h5
+      md5: de7c41b0fd735f1d74efb62ab5a8bc65
+      size: 88027400
+    - path: configs/config.yaml
+      md5: 3bf9212ebd8810093f7fbf31a21dedb4
+      size: 1861
+    - path: params.yaml
+      md5: 604a1a6b9492affd385965e02fe96602
+      size: 536
+    - path: src/cloud_sync/object_storage.py
+      md5: 276090407df5f37f317c71e090c1c68f
+      size: 3452
+    - path: src/ml/model.py
+      md5: e15c9a9261902ca431e3433e19e36f53
+      size: 5034
+    - path: src/stage_04_model_blessing.py
+      md5: 8a0465c88d5cfde10f8b8e65f21239c2
+      size: 4287
+    - path: src/utils/common.py
+      md5: 49d2036517bacc83d42e76338a4528cc
+      size: 537
+    params:
+      params.yaml:
+        BLESSING_THRESHOLD_COMPARISION: false
+        MODEL_BLESSING_THRESHOLD: 1.5
+    outs:
+    - path: artifacts/models/blessed_model.h5
+      md5: c8cb4ac086d0e0aad0d5d03651671e9b
+      size: 88027400
