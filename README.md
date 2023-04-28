@@ -61,13 +61,12 @@ Following are the main contents to follow, you can jump to any section:
 >   -  [Conclusion](#conclusion-)<br>
 
 ### Introduction<a id='project-intro'></a>
-<pre>
+
 Brain tumor detection is a critical task in the field of medical imaging, as it plays a crucial role in diagnosing and treating brain tumors, which can be life-threatening. With the advancement of machine learning and artificial intelligence (AI), vision AI has emerged as a promising approach for accurate and efficient brain tumor detection from medical images. In this project, we aim to develop a vision AI system for brain tumor detection using a level 2 MLOps (Machine Learning Operations) architecture, which includes a robust dvc (Data Version Control) pipeline and a Docker image for seamless production deployment.
 
 MLOps, also known as DevOps for machine learning, is an iterative and collaborative approach that integrates machine learning models into the software development process, ensuring the reliability, scalability, and maintainability of ML models in production. Level 2 MLOps architecture focuses on advanced versioning and reproducibility, ensuring that the ML pipeline is well-documented and can be easily replicated in different environments.
 
 The ultimate goal of our vision AI project is to develop a robust and scalable brain tumor detection system that can be easily deployed in production environments. By leveraging the level 2 MLOps architecture. It will help to minimize the healthcare operational cost and increase the effectiveness of the services by assisting the healthcare provider in accurate decision-making.
-</pre>
 
 ## Class Activation Map
 ![image](./assets/ClassActivation.jpeg)
