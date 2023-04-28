@@ -161,47 +161,84 @@ jobs:
           name: Stop previous version
           command: gcloud app versions stop --service=${GCLOUD_APP_SERVICE} $(gcloud app versions list --filter="traffic_split=0" --sort-by="~last_deployed_time" --limit=1 --format="value(id)")
 
-# workflows:
-#   Development:
-#     jobs:
-#       - continuous-integration
+workflows:
+  Development:
+    jobs:
+      - continuous-integration
 
-#       - continuous-training:
-#           requires:
-#             - continuous-integration
-#           filters:
-#             branches:
-#               only:
-#                 - dev
+      - continuous-training:
+          requires:
+            - continuous-integration
+          filters:
+            branches:
+              only:
+                - dev
 
 
-  # Staging:
-  #   jobs:
-  #     - continuous-integration
+  Staging:
+    jobs:
+      - continuous-integration
 
-  #     - continuous-training:
-  #         requires:
-  #           - continuous-integration
+      - continuous-training:
+          requires:
+            - continuous-integration
+          filters:
+            branches:
+              only:
+                - staging
+                
+      - continuous-building:
+          requires:
+            - continuous-training
+      - continuous-delivery:
+          requires:
+            - continuous-building
+      - continuous-deployment:
+          requires:
+            - continuous-delivery
+      - sanity-check:
+          type: approval
+          requires:
+          - continuous-deployment
+
+  Production:
+    jobs:
+      - continuous-integration
+
+      - continuous-training:
+          requires:
+            - continuous-integration
+      - continuous-building:
+          requires:
+            - continuous-training
+      - continuous-delivery:
+          requires:
+            - continuous-building
+      - continuous-deployment:
+          requires:
+            - continuous-delivery
+      - sanity-check:
+          type: approval
+          requires:
+          - continuous-deployment
+      - promote-to-production:
+          requires:
+            - continuous-deployment
+            - sanity-check
+
+          filters:
+            branches:
+              only:
+                - main
+
+  # Scheduled Production Pipeline:
+  #   triggers:
+  #     - schedule:
+  #         cron: "5 12 * * *"
   #         filters:
   #           branches:
   #             only:
-  #               - staging
-                
-  #     - continuous-building:
-  #         requires:
-  #           - continuous-training
-  #     - continuous-delivery:
-  #         requires:
-  #           - continuous-building
-  #     - continuous-deployment:
-  #         requires:
-  #           - continuous-delivery
-  #     - sanity-check:
-  #         type: approval
-  #         requires:
-  #         - continuous-deployment
-
-  # Production:
+  #               - main
   #   jobs:
   #     - continuous-integration
 
@@ -225,61 +262,4 @@ jobs:
   #         requires:
   #           - continuous-deployment
   #           - sanity-check
-
-  #         filters:
-  #           branches:
-  #             only:
-  #               - main
-
-  # Scheduled Sensors CICD:
-  #   triggers:
-  #     - schedule:
-  #         cron: "5 12 * * *"
-  #         filters:
-  #           branches:
-  #             only:
-  #               - main
-  #   jobs:
-  #     - continuous-integration
-
-  #     - continuous-training-delivery:
-  #         requires:
-  #           - continuous-integration
-
-  #     - sanity-check:
-  #         type: approval
-  #         requires:
-  #         - continuous-training-delivery
-
-  #     - continuous-deployment:
-  #         requires:
-  #           - continuous-training-delivery
-  #           - sanity-check
-
-  # Serving Pipeline:
-  #   jobs:
-  #     - continuous-integration
-
-  #     - continuous-serving:
-  #         requires:
-  #           - continuous-integration
-  #         filters:
-  #           branches:
-  #             only:
-  #               - main
-
-  # Scheduled Serving Pipeline:
-  #   triggers:
-  #     - schedule:
-  #         cron: "5 1 * * *"
-  #         filters:
-  #           branches:
-  #             only:
-  #               - main
-  #   jobs:
-  #     - continuous-integration
-
-  #     - continuous-serving:
-  #         requires:
-  #           - continuous-integration
           
