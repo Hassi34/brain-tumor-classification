@@ -19,7 +19,7 @@
         <img alt="License" src="https://img.shields.io/badge/python-3.7%20%7C%203.8%20%7C%203.9%20%7C%203.10-g.svg">
     </a>
     <a href="https://github.com/Hassi34/brain-tumor-classification">
-        <img alt="Build" src="https://circleci.com/gh/Hassi34/brain-tumor-classification.svg?style=svg&circle-token=d85dfbfefbcb696a26e157aff116945f84f904d3">
+        <img alt="Build" src="https://circleci.com/gh/Hassi34/brain-tumor-classification.svg?style=svg&circle-token=4a7b1b0ecef476886311269a35c17f05ec51ac60">
     </a>
     <a href="https://github.com/Hassi34/brain-tumor-classification">
         <img alt="Last Commit" src="https://img.shields.io/github/last-commit/hassi34/brain-tumor-classification/main?color=g">

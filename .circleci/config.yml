@@ -175,61 +175,61 @@ workflows:
                 - dev
 
 
-  Staging:
-    jobs:
-      - continuous-integration
+  # Staging:
+  #   jobs:
+  #     - continuous-integration
 
-      - continuous-training:
-          requires:
-            - continuous-integration
-          filters:
-            branches:
-              only:
-                - staging
+  #     - continuous-training:
+  #         requires:
+  #           - continuous-integration
+  #         filters:
+  #           branches:
+  #             only:
+  #               - staging
                 
-      - continuous-building:
-          requires:
-            - continuous-training
-      - continuous-delivery:
-          requires:
-            - continuous-building
-      - continuous-deployment:
-          requires:
-            - continuous-delivery
-      - sanity-check:
-          type: approval
-          requires:
-          - continuous-deployment
+  #     - continuous-building:
+  #         requires:
+  #           - continuous-training
+  #     - continuous-delivery:
+  #         requires:
+  #           - continuous-building
+  #     - continuous-deployment:
+  #         requires:
+  #           - continuous-delivery
+  #     - sanity-check:
+  #         type: approval
+  #         requires:
+  #         - continuous-deployment
 
-  Production:
-    jobs:
-      - continuous-integration
+  # Production:
+  #   jobs:
+  #     - continuous-integration
 
-      - continuous-training:
-          requires:
-            - continuous-integration
-      - continuous-building:
-          requires:
-            - continuous-training
-      - continuous-delivery:
-          requires:
-            - continuous-building
-      - continuous-deployment:
-          requires:
-            - continuous-delivery
-      - sanity-check:
-          type: approval
-          requires:
-          - continuous-deployment
-      - promote-to-production:
-          requires:
-            - continuous-deployment
-            - sanity-check
+  #     - continuous-training:
+  #         requires:
+  #           - continuous-integration
+  #     - continuous-building:
+  #         requires:
+  #           - continuous-training
+  #     - continuous-delivery:
+  #         requires:
+  #           - continuous-building
+  #     - continuous-deployment:
+  #         requires:
+  #           - continuous-delivery
+  #     - sanity-check:
+  #         type: approval
+  #         requires:
+  #         - continuous-deployment
+  #     - promote-to-production:
+  #         requires:
+  #           - continuous-deployment
+  #           - sanity-check
 
-          filters:
-            branches:
-              only:
-                - main
+  #         filters:
+  #           branches:
+  #             only:
+  #               - main
 
   # Scheduled Sensors CICD:
   #   triggers:
