@@ -161,18 +161,18 @@ jobs:
           name: Stop previous version
           command: gcloud app versions stop --service=${GCLOUD_APP_SERVICE} $(gcloud app versions list --filter="traffic_split=0" --sort-by="~last_deployed_time" --limit=1 --format="value(id)")
 
-workflows:
-  Development:
-    jobs:
-      - continuous-integration
+# workflows:
+#   Development:
+#     jobs:
+#       - continuous-integration
 
-      - continuous-training:
-          requires:
-            - continuous-integration
-          filters:
-            branches:
-              only:
-                - dev
+#       - continuous-training:
+#           requires:
+#             - continuous-integration
+#           filters:
+#             branches:
+#               only:
+#                 - dev
 
 
   # Staging:
