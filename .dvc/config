@@ -1,5 +1,0 @@
-[core]
-    remote = dvc-remote
-['remote "dvc-remote"']
-    url = gs://mlops-378116/brain-tumor-classification-dvc
-    version_aware = true
