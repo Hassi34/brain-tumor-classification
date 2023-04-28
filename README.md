@@ -76,7 +76,7 @@ The ultimate goal of our vision AI project is to develop a robust and scalable b
 ## CICD on Circleci
 ![image](./assets/cicd.png)
 ## DagsHub Data Pipeline
-![image](./assets/DagsHubDatapipeline.png)<br>
+![image](./assets/DagsHubPipeline.png)<br>
 Complete Project Data Pipeline is available at [DagsHub Data Pipeline](https://dagshub.com/hassi34/brain-tumor-classification)
 
 
