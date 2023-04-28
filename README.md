@@ -69,14 +69,14 @@ MLOps, also known as DevOps for machine learning, is an iterative and collaborat
 The ultimate goal of our vision AI project is to develop a robust and scalable brain tumor detection system that can be easily deployed in production environments. By leveraging the level 2 MLOps architecture. It will help to minimize the healthcare operational cost and increase the effectiveness of the services by assisting the healthcare provider in accurate decision-making.
 
 ## Class Activation Map
-![image](./assets/ActivationMap.png)
+![image](./assets/ActivationMap.jpg)
 ## System Design
-![image](./assets/SystemDesign.png)
+![image](./assets/SystemDesign.jpg)
 
 ## CICD on Circleci
-![image](./assets/cicd.png)
+![image](./assets/cicd.jpg)
 ## DagsHub Data Pipeline
-![image](./assets/DagsHubPipeline.png)<br>
+![image](./assets/DagsHubPipeline.jpg)<br>
 Complete Project Data Pipeline is available at [DagsHub Data Pipeline](https://dagshub.com/hassi34/brain-tumor-classification)
 
 
